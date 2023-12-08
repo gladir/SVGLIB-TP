@@ -18,7 +18,7 @@ Type
 Procedure CircleSVG(Var F:Text;X,Y,R:Integer);
 Function  CloseSVG(Var F:Text):Boolean;
 Function  CreateSVG(Var F:Text;FileName:String):Boolean;
-Function  CreateWidthSizeSVG(Var F:Text;FileName:String;Width,Height:Word):Boolean;
+Function  CreateWithSizeSVG(Var F:Text;FileName:String;Width,Height:Word):Boolean;
 Procedure FillPolySVG(Var F:Text;N:Integer;Var P:ArrayPoint);
 Procedure LineSVG(Var F:Text;X1,Y1,X2,Y2:Integer);
 Procedure RectSVG(Var F:Text;X1,Y1,X2,Y2:Integer);
@@ -27,19 +27,19 @@ Procedure WriteTextXY_SVG(Var F:Text;X,Y:Integer;Msg:String);
 
 IMPLEMENTATION
 
-Function CreateWidthSizeSVG(Var F:Text;FileName:String;Width,Height:Word):Boolean;Begin
+Function CreateWithSizeSVG(Var F:Text;FileName:String;Width,Height:Word):Boolean;Begin
  {$I-}Assign(F,FileName);
  Rewrite(F);{$I+}
  If(IOResult=0)Then Begin
   WriteLn(F,'<svg width="',Width,'" height="',Height,'" xmlns="http://www.w3.org/2000/svg">');
-  CreateWidthSizeSVG:=True;
+  CreateWithSizeSVG:=True;
  End
   Else
- CreateWidthSizeSVG:=False;
+ CreateWithSizeSVG:=False;
 End;
 
 Function CreateSVG(Var F:Text;FileName:String):Boolean;Begin
- CreateSVG:=CreateWidthSizeSVG(F,FileName,640,480);
+ CreateSVG:=CreateWithSizeSVG(F,FileName,640,480);
 End;
 
 Procedure CircleSVG(Var F:Text;X,Y,R:Integer);Begin
